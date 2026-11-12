@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>세포배양실 근로 체크리스트</title>
+<meta name="apple-mobile-web-app-title" content="근로 체크리스트">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#eceef0">
+<style>
+  html, body { margin: 0; height: 100%; background: #eceef0; }
+  body { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+  iframe { flex: 1; display: block; width: 100%; border: 0; }
+  .help { flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 8px;
+          padding: 6px 12px calc(6px + env(safe-area-inset-bottom, 0px));
+          font: 12px/1.4 "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+          color: #5b636b; background: #f4f5f7; border-top: 1px solid #c9ced3; }
+  .help button { font: inherit; color: #16191c; border: 1px solid #c9ced3; background: #fff; padding: 2px 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+<!-- 실제 체크리스트는 구글 Apps Script에 있고, 이 페이지는 그것을 감싸기만 합니다.
+     다른 사이트 안에 넣으면 브라우저가 구글 로그인 정보를 보내지 않아서
+     구글 계정이 로그인된 휴대폰에서도 '파일을 열 수 없습니다' 없이 열립니다. -->
+<iframe src="https://script.google.com/macros/s/AKfycbxW_r3y109EGzG3apLeAl4OQjOSuMA5h-xHRhncC8cygnba972X5tvfaxrAAvBKEaMp1A/exec"
+        title="세포배양실 근로 체크리스트" allow="clipboard-write"></iframe>
+<div class="help">
+  <span>화면이 안 나오면 비밀(개인정보 보호) 모드로 열어 주세요.</span>
+  <button type="button" id="copy">주소 복사</button>
+</div>
+<script>
+  document.getElementById('copy').onclick = function () {
+    var btn = this, url = location.href;
+    var done = function () { btn.textContent = '복사됨'; };
+    var fallback = function () { window.prompt('주소를 길게 눌러 복사하세요', url); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback);
+    else fallback();
+  };
+</script>
+</body>
+</html>
