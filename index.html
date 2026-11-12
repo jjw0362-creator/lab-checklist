@@ -16,6 +16,10 @@
           font: 12px/1.4 "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
           color: #5b636b; background: #f4f5f7; border-top: 1px solid #c9ced3; }
   .help button { font: inherit; color: #16191c; border: 1px solid #c9ced3; background: #fff; padding: 2px 8px; cursor: pointer; }
+  /* 처음 6초만 보였다가 사라짐 */
+  .help { transition: opacity .4s ease; }
+  .help.fade { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) { .help { transition: none; } }
 </style>
 </head>
 <body>
@@ -36,6 +40,12 @@
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback);
     else fallback();
   };
+  // 안내는 처음 6초만 보여주고 사라지게 함 (체크리스트 화면이 그만큼 넓어짐)
+  setTimeout(function () {
+    var help = document.querySelector('.help');
+    help.classList.add('fade');
+    setTimeout(function () { help.style.display = 'none'; }, 450);
+  }, 6000);
 </script>
 </body>
 </html>
